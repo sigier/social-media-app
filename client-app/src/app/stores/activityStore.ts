@@ -1,6 +1,7 @@
 import { action, makeAutoObservable, observable, runInAction } from "mobx";
 import agent from "../api/agent";
 import { Activity } from "../models/activity";
+import { v4 as uuid } from 'uuid';
 
 
 export default class ActivityStore {
@@ -76,5 +77,70 @@ export default class ActivityStore {
     closeForm = () => {
         
         this.editMode = false;
+    };
+
+
+    createActivity = async (activity: Activity) => {
+
+        this.loading = true;
+
+        activity.id = uuid();
+
+        try {
+
+            await agent.activities.create(activity);
+
+            runInAction(() => {
+
+                this.activities.push(activity);
+
+                this.chosenActivity = activity;
+
+                this.editMode = false;
+
+                this.loading = false;
+            });
+
+        } catch (error) {
+
+            console.log(error);
+
+            runInAction(() => {
+
+                this.loading = false;
+            });
+        }
+    };
+
+
+    updateActivity = async (activity: Activity) => {
+
+        this.loading = true;
+
+        try {
+
+            await agent.activities.update(activity);
+
+            runInAction(() => {
+
+                this.activities = 
+                    [...this.activities.filter(x => x.id !== activity.id), activity];
+                
+                this.chosenActivity = activity;
+
+                this.editMode = false;
+
+                this.loading = false;
+            });
+            
+        } catch (error) {
+
+            console.log(error);
+            
+            runInAction(() => {
+                
+                this.loading = false;
+            });
+        }
     };
 };

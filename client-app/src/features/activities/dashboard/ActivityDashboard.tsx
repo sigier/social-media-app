@@ -9,14 +9,12 @@ import ActivityList from './ActivityList';
 
 interface Props {
     activities: Activity[];
-    createOrEdit: (activity: Activity) => void;
     deleteActivity: (id: string) => void;
     submitting: boolean;
 }
 
 function ActivityDashboard(
     {activities, 
-     createOrEdit,
      deleteActivity,
      submitting
     }: Props) {
@@ -41,11 +39,7 @@ function ActivityDashboard(
                  <ActivityDetails />
                 }
                 {
-                 editMode &&
-                    <ActivityForm
-                     createOrEdit={ createOrEdit }
-                     submitting= { submitting }
-                    />
+                 editMode && <ActivityForm/>
                 }
             </Grid.Column>
         </Grid>
