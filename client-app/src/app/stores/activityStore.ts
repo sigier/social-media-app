@@ -6,7 +6,7 @@ import { v4 as uuid } from 'uuid';
 
 export default class ActivityStore {
     
-    activities: Activity[] = [];
+    activityRegister = new Map<string, Activity>();
 
     chosenActivity: Activity | undefined = undefined;
 
@@ -14,7 +14,7 @@ export default class ActivityStore {
 
     loading = false;
 
-    loadingInitial = false;
+    loadingInitial = true;
 
     
     constructor() {
@@ -23,11 +23,17 @@ export default class ActivityStore {
     }
 
 
+    get activitiesByDate(){
+
+        return Array.from(this.activityRegister.values()).sort((a,b) => 
+
+            Date.parse(a.date) - Date.parse(b.date)
+        );
+    }
+
     loadActivities = async () => {
 
-        this.loadingInitial = true;
-
-        try {
+         try {
 
             const activities = await agent.activities.list();
 
@@ -37,7 +43,7 @@ export default class ActivityStore {
 
                 activity.date = activity.date.split('T')[0];
         
-                this.activities.push(activity);
+                this.activityRegister.set(activity.id, activity);
                 });
 
                 this.loadingInitial = false;
@@ -54,7 +60,7 @@ export default class ActivityStore {
 
     selectActivity = (id: string) => {
 
-        this.chosenActivity = this.activities.find(x => x.id ===id);
+        this.chosenActivity = this.activityRegister.get(id);
     };
 
 
@@ -92,7 +98,7 @@ export default class ActivityStore {
 
             runInAction(() => {
 
-                this.activities.push(activity);
+                this.activityRegister.set(activity.id, activity);
 
                 this.chosenActivity = activity;
 
@@ -123,8 +129,7 @@ export default class ActivityStore {
 
             runInAction(() => {
 
-                this.activities = 
-                    [...this.activities.filter(x => x.id !== activity.id), activity];
+                this.activityRegister.set(activity.id, activity);
                 
                 this.chosenActivity = activity;
 
@@ -156,8 +161,7 @@ export default class ActivityStore {
 
             runInAction(() => {
 
-                this.activities = 
-                    [...this.activities.filter(x => x.id !== id)];
+                this.activityRegister.delete(id);
 
                 if (this.chosenActivity?.id===id) {
 
