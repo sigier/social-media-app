@@ -56,13 +56,13 @@ function ActivityForm() {
                 id: uuid()
             };
 
-            createActivity(newActivity).
-            then(() => history.push(`/activities/${newActivity.id}`));
+            createActivity(newActivity).then(
+                () => history.push(`/activities/${newActivity.id}`));
 
         } else {
             
-            updateActivity(activity)
-            .then(() => history.push(`/activities/${activity.id}`));
+            updateActivity(activity).then(
+                () => history.push(`/activities/${activity.id}`));
         } 
     }
 
