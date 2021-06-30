@@ -11,7 +11,7 @@ namespace API.Extensions
 {
     public static class AppServiceExtensions
     {
-        public static  IServiceCollection AddAppServices (
+        public static void AddAppServices (
                 this IServiceCollection services,
                 IConfiguration configuration
         ) 
