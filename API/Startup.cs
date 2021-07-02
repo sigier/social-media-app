@@ -3,12 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
-using Microsoft.EntityFrameworkCore;
-using Persistence;
-using MediatR;
 using Application.Activities;
-using Application.Core;
 using API.Extensions;
 using FluentValidation.AspNetCore;
 using API.Middleware;
@@ -47,7 +42,7 @@ namespace API
             
             services.AddAppServices(_config);
 
-            services.AddIdentityServices(_config);
+            services.IdentityServices(_config);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
