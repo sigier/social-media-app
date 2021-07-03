@@ -12,8 +12,9 @@ import ReuseTextArea from '../../../app/common/form/ReuseTextArea';
 import { categoryOptions } from '../../../app/common/options/categoryOptions';
 import ReuseSelectInput from '../../../app/common/form/ReuseSelectInput';
 import ReuseDateInput from '../../../app/common/form/ReuseDateInput';
-import { Activity } from '../../../app/models/activity';
+import { Activity, ActivityFormValues } from '../../../app/models/activity';
 import { v4 as uuid } from 'uuid';
+import { act } from 'react-dom/test-utils';
 
 
 
@@ -41,16 +42,8 @@ function ActivityForm() {
     })
 
 
-    const [activity, setActivity] = useState<Activity>({
-
-        id: '',
-        title: '',
-        category: '',
-        description: '',
-        date: null,
-        city: '',
-        venue: ''
-    });
+    const [activity, setActivity] = 
+            useState<ActivityFormValues>(new ActivityFormValues());
 
 
     const { id } = useParams<{ id: string }>();
@@ -60,13 +53,13 @@ function ActivityForm() {
 
         if (id) {
 
-            loadActivity(id).then(activity => setActivity(activity!));
+            loadActivity(id).then(activity => setActivity(new ActivityFormValues(activity)));
         }
 
     }, [id, loadActivity]);
 
 
-    function handleFormSubmit(activity: Activity) {
+    function handleFormSubmit(activity: ActivityFormValues) {
         if (!activity.id) {
             let newActivity = {
                 ...activity,
@@ -127,7 +120,7 @@ function ActivityForm() {
                                 positive
                                 type='submit'
                                 content='Sumbit'
-                                loading={loading}
+                                loading={isSubmitting}
                             />
                             <Button
                                 disabled={isSubmitting || !isValid || !dirty }

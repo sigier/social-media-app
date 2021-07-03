@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Persistence
 {
-   public class Seed
+    public class Seed
     {
         public static async Task SeedData(DataContext context,
             UserManager<AppUser> userManager)
@@ -38,7 +38,7 @@ namespace Persistence
 
                 foreach (var user in users)
                 {
-                    await userManager.CreateAsync(user, "Pa$$w0rd");
+                    await userManager.CreateAsync(user, "Pa$$word1");
                 }
 
                 var activities = new List<Activity>
