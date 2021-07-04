@@ -1,13 +1,12 @@
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
 import { Card, Icon, Image } from "semantic-ui-react";
-import { isConditionalExpression } from "typescript";
 import { Profile } from "../../app/models/profile";
 
 
 interface Props {
     profile: Profile;
-}
+};
 
 
 function ProfileCard({profile}: Props) {
@@ -23,7 +22,7 @@ function ProfileCard({profile}: Props) {
           />
           <Card.Content >
               <Card.Header>
-                  { profile.diplayName }
+                  { profile.displayName }
               </Card.Header>
               <Card.Description>
                   Bio goes here

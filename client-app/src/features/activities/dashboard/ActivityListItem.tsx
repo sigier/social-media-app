@@ -42,7 +42,7 @@ export default function ActivityListItem({ activity } : Props) {
                                 {activity.title}
                             </Item.Header>
                             <Item.Description>
-                                Hosted by {activity.host?.diplayName}
+                                Hosted by {activity.host?.displayName}
                             </Item.Description>
                             {activity.isHost && (
                                 <Item.Description>

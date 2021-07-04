@@ -46,7 +46,7 @@ function ActivityDetailedSidebar ({activity: {attendees, host}} : Props) {
                         <Item.Content verticalAlign='middle'>
                             <Item.Header as='h3'>
                                 <Link to={`/profiles/${attendee.username}`}>
-                                 { attendee.diplayName }
+                                 { attendee.displayName }
                                 </Link>
                             </Item.Header>
                             <Item.Extra style={{ color: 'orange' }}>Following</Item.Extra>
