@@ -10,6 +10,7 @@ function NavBar() {
 
 
     return (
+        
      <Menu inverted fixed='top'>
          <Container>
              <Menu.Item  as={ NavLink } to='/' exact header>

@@ -25,17 +25,21 @@ namespace Application.Profiles
 
             private readonly IMapper _mapper;
 
+            private readonly IUserAccessor _accessor;
 
-            public Handler(DataContext context,IMapper mapper)
+
+            public Handler(DataContext context,IMapper mapper, IUserAccessor accessor)
             {
                 _context = context;
                 _mapper = mapper;
+                _accessor= accessor;
             }
 
             public async Task<Result<Profile>> Handle(Query query, CancellationToken cancellationToken)
             {
                 var user = await _context.Users
-                        .ProjectTo<Profile>(_mapper.ConfigurationProvider)
+                        .ProjectTo<Profile>(_mapper.ConfigurationProvider,
+                              new {currentUserName = _accessor.GetUsername()})
                         .SingleOrDefaultAsync(x => x.Username == query.Username);
 
                 return Result<Profile>.Success(user);
