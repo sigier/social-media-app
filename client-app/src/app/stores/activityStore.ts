@@ -4,7 +4,7 @@ import { runInAction } from "mobx";
 import agent from "../api/agent";
 import { Activity, ActivityFormValues } from "../models/activity";
 import { Profile } from "../models/profile";
-import { store, useStore } from "./store";
+import { store } from "./store";
 
 
 export default class ActivityStore {
@@ -305,5 +305,11 @@ export default class ActivityStore {
             runInAction(() => this.loading = false);
         }
 
+    };
+
+
+    clearChosenActivity = () => {
+        
+        this.chosenActivity = undefined;
     };
 };

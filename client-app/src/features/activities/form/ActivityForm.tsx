@@ -12,10 +12,8 @@ import ReuseTextArea from '../../../app/common/form/ReuseTextArea';
 import { categoryOptions } from '../../../app/common/options/categoryOptions';
 import ReuseSelectInput from '../../../app/common/form/ReuseSelectInput';
 import ReuseDateInput from '../../../app/common/form/ReuseDateInput';
-import { Activity, ActivityFormValues } from '../../../app/models/activity';
+import { ActivityFormValues } from '../../../app/models/activity';
 import { v4 as uuid } from 'uuid';
-import { act } from 'react-dom/test-utils';
-
 
 
 function ActivityForm() {
@@ -26,7 +24,6 @@ function ActivityForm() {
 
     const { createActivity, 
         updateActivity, 
-        loading,
         loadActivity,
         loadingInitial
       } = activityStore;
