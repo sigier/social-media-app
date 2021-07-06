@@ -11,27 +11,22 @@ function ActivityList() {
 
     const { groupedActivities } = activityStore;
 
-
     return (
         <>
-            {
-                groupedActivities.map(([group, activities]) => (
-                    <Fragment key={ group }>
-                        <Header sub color='teal'>
-                            { group }
-                        </Header>
-                        {
-                            activities.map(activity =>
-                                <ActivityListItem key={activity.id} activity={activity} />
-                            )
-                        }
-                    </Fragment>
-                ))
-            }
-
+            {groupedActivities.map(([group, activities]) => (
+                <Fragment key={group}>
+                    <Header sub color='teal'>
+                        {group}
+                    </Header>
+                    {activities.map(activity => (
+                        <ActivityListItem key={activity.id} activity={activity} />
+                    ))}
+                </Fragment>
+            ))}
         </>
 
     )
+ 
 };
 
 

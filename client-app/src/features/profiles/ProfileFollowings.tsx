@@ -1,6 +1,5 @@
 import { observer } from "mobx-react-lite";
-import { useEffect } from "react";
-import { Card, CardDescription, Grid, Header, Tab } from "semantic-ui-react";
+import { Card, Grid, Header, Tab } from "semantic-ui-react";
 import { useStore } from "../../app/stores/store";
 import ProfileCard from "./ProfileCard";
 
@@ -37,12 +36,12 @@ function ProfileFollowings() {
                     <Card.Group
                      itemsPerRow={4}
                     >
-                        { followings.map(profile => {
+                        { followings.map(profile => (
                             <ProfileCard 
                              key={profile.username}
                              profile={profile}
                             />
-                          })
+                        ))
                         }
                     </Card.Group>
                 </Grid.Column>

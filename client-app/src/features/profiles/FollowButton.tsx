@@ -1,4 +1,3 @@
-import { profile } from "console";
 import { observer } from "mobx-react-lite";
 import { SyntheticEvent } from "react";
 import { Button, Reveal } from "semantic-ui-react";
